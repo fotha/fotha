@@ -1,0 +1,92 @@
+body {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    user-select: none;
+}
+
+.body-disabled {
+    pointer-events: none;
+}
+
+.header {
+    height: 50px;
+    width: 600px;
+    background-color: #3c3c3c;
+    line-height: 50px;
+    text-align: center;
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.blue-color {
+    color: #53b4ed
+}
+
+.pink-color {
+    color: #ff576b
+}
+
+.main {
+    width: 560px;
+    background-color: #343434;
+    padding: 10px 20px;
+}
+
+.form-group {
+    padding: 10px 0px;
+}
+
+.form-input {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #fff;
+    background-color: #454545;
+    background-clip: padding-box;
+    border: 1px solid #3c3c3c;
+    border-radius: .25rem;
+    cursor: pointer;
+}
+
+.input-empty {
+    border-color: #1a1a1a !important;
+}
+
+.form-label {
+    padding-bottom: 5px;
+}
+
+.form-submit {
+    padding-top: 40px;
+}
+
+.form-button {
+    display: block;
+    width: 100%;
+    padding: .75rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #fff;
+    border: 1px solid #3c3c3c;
+    border-radius: .25rem;
+    cursor: pointer;
+    background-color: #606060;
+    background-clip: padding-box;
+}
+
+.form-button-inprogress {
+    --percent: 0%;
+    background-image: linear-gradient(to right, #28a745 var(--percent), #606060 0%);
+}
+
+.message {
+    font-size: .8rem;
+    padding-top: 10px;
+    visibility: hidden;
+}
+
+.link {
+    cursor: pointer;
+}
