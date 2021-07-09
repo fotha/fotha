@@ -5,7 +5,7 @@ It copies only unique media files and divides them by types and years. You can b
 
 ## How to use
 1. Select media folder with your photos and videos
-2. Select the folder where you want to backup
+2. Select the folder where you want to backup  
 For example, create a new folder on your external HDD and select it
 3. Click "Backup Files"
 4. The program will copy only unique media files and divide them by types and years
