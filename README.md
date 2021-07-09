@@ -1,6 +1,6 @@
 # Fotha Backup
-Fotha is a program for backup images and videos. It copies only unique media files and divides them by types and years.
-You can backup from several different folders to a single backup folder. The program will copy only unique media files.
+Fotha is a program for backup images and videos. It copies only unique media files and divides them by types and years.  
+You can backup from several different folders to a single backup folder. The program will copy only unique media files.  
 > None of your data is sent to the Internet
 
 ## How to use
@@ -11,8 +11,8 @@ For example, create a new folder on your external HDD and select it
 4. The program will copy only unique media files and divide them by types and years
 
 ## Downloads
-- [Apple macOS]()
-- [Microsoft Windows]()
-- [Debian, Ubuntu, Linux Mint, Kali Linux]()
-- [Fedora, CentOS, RHEL, OpenSUSE]()
-- [Linux AppImage]()
+- [Apple macOS](https://github.com/fotha/fotha/releases/download/v1.0.0/Fotha-Backup-1.0.0.dmg)
+- [Microsoft Windows](https://github.com/fotha/fotha/releases/download/v1.0.0/Fotha-Backup-1.0.0-x64.exe)
+- [Debian, Ubuntu, Linux Mint, Kali Linux](https://github.com/fotha/fotha/releases/download/v1.0.0/fotha_1.0.0_amd64.deb)
+- [Fedora, CentOS, RHEL, OpenSUSE](https://github.com/fotha/fotha/releases/download/v1.0.0/fotha-1.0.0.x86_64.rpm)
+- [Linux AppImage](https://github.com/fotha/fotha/releases/download/v1.0.0/Fotha-Backup-1.0.0.AppImage)
