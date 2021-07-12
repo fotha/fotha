@@ -2,6 +2,7 @@
 Fotha is a program for backup images and videos.  
 It copies only unique media files and divides them by types and years. You can backup from different folders to a single backup folder.
 > None of your data is sent to the Internet
+![Program UI](https://drive.google.com/file/d/1pS9MOXrBLF_uAKStCqheT10-twe26MEf/view?usp=sharing)
 
 ## How to use
 1. Select media folder with your photos and videos
