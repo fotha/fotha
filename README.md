@@ -13,6 +13,8 @@ For example, create a new folder on your external HDD and select it
 ![Program UI](https://i.ibb.co/McSxLZq/program-ui.png) 
 
 ## Downloads
+- [Apple macOS](https://github.com/fotha/fotha/releases/download/v1.0.0/Fotha-Backup-1.0.0.dmg)
+- [Microsoft Windows](https://github.com/fotha/fotha/releases/download/v1.0.0/Fotha-Backup-1.0.0-x64.exe)
 - [Debian, Ubuntu, Linux Mint, Kali Linux](https://github.com/fotha/fotha/releases/download/v1.0.0/fotha_1.0.0_amd64.deb)
 - [Fedora, CentOS, RHEL, OpenSUSE](https://github.com/fotha/fotha/releases/download/v1.0.0/fotha-1.0.0.x86_64.rpm)
 - [Linux AppImage](https://github.com/fotha/fotha/releases/download/v1.0.0/Fotha-Backup-1.0.0.AppImage)
