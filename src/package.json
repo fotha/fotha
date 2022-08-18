@@ -37,63 +37,6 @@
       "**/*",
       "!dist/"
     ],
-    "mac": {
-      "category": "public.app-category.utilities",
-      "files": [
-        "!node_modules/ffmpeg-static-electron/bin/win${/*}",
-        "!node_modules/ffmpeg-static-electron/bin/linux${/*}",
-        "!node_modules/ffprobe-static-electron/bin/win${/*}",
-        "!node_modules/ffprobe-static-electron/bin/linux${/*}"
-      ],
-      "target": [
-        {
-          "target": "dmg",
-          "arch": [
-            "x64"
-          ]
-        }
-      ]
-    },
-    "dmg": {
-      "background": "assets/background.png",
-      "icon": "assets/icon.icns",
-      "iconSize": 128,
-      "contents": [
-        {
-          "x": 415,
-          "y": 250,
-          "type": "link",
-          "path": "/Applications"
-        },
-        {
-          "x": 140,
-          "y": 250,
-          "type": "file"
-        }
-      ]
-    },
-    "win": {
-      "artifactName": "${productName}-${version}-${arch}.${ext}",
-      "target": [
-        {
-          "target": "portable",
-          "arch": [
-            "x64"
-          ]
-        }
-      ],
-      "icon": "assets/icon.ico",
-      "files": [
-        "node_modules/ffmpeg-static-electron/bin/win/${arch}/ffmpeg",
-        "!node_modules/ffmpeg-static-electron/bin/win/ia32${/*}",
-        "!node_modules/ffmpeg-static-electron/bin/linux${/*}",
-        "!node_modules/ffmpeg-static-electron/bin/mac${/*}",
-        "node_modules/ffprobe-static-electron/bin/win/${arch}/ffprobe",
-        "!node_modules/ffprobe-static-electron/bin/win/ia32${/*}",
-        "!node_modules/ffprobe-static-electron/bin/linux${/*}",
-        "!node_modules/ffprobe-static-electron/bin/mac${/*}"
-      ]
-    },
     "linux": {
       "target": [
         "AppImage",
