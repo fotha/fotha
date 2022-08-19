@@ -122,9 +122,9 @@ module.exports = class Backup {
         const ls = await fs.readdir(dirPath);
 
         for (let i = 0, len = ls.length; i < len; i++) {
-            const file = ls[i];
+            const fileName = ls[i];
 
-            const filePath = path.join(dirPath, file);
+            const filePath = path.join(dirPath, fileName);
 
             const isDirectory = await this.isDirectory(filePath);
             if (isDirectory) {
@@ -132,11 +132,14 @@ module.exports = class Backup {
                 continue;
             }
 
-            if (this.excludedFileNames.includes(file)) {
+            if (this.isExcludedFile(fileName)) {
+                continue;
+            }
+            if (this.isSystemFile(fileName)) {
                 continue;
             }
 
-            if (this.isSupportedFileExtension(file)) {
+            if (this.isSupportedFileExtension(fileName)) {
                 filesList.push(filePath);
             }
         }
@@ -150,8 +153,16 @@ module.exports = class Backup {
         }
     }
 
-    isSupportedFileExtension(file) {
-        const ext = this.getFileExtension(file);
+    isExcludedFile(fileName) {
+        return this.excludedFileNames.includes(fileName);
+    }
+
+    isSystemFile(fileName) {
+        return fileName.charAt(0) == '.';
+    }
+
+    isSupportedFileExtension(fileName) {
+        const ext = this.getFileExtension(fileName);
         return this.isImageExtension(ext) || this.isVideoExtension(ext);
     }
 
@@ -189,39 +200,43 @@ module.exports = class Backup {
         return String(exif['Make']?.description).toLowerCase() == 'apple';
     }
 
-    async getFileCopyPath(filePath, fileData) {
+    async getFileCopyPath(filePath, fileData, attempt) {
         let copyPath;
 
         const ext = this.getFileExtension(filePath);
 
         if (this.isVideoExtension(ext)) {
-            copyPath = await this.getVideoFileCopyPath(filePath, ext);
+            copyPath = await this.getVideoFileCopyPath(filePath, ext, attempt);
         } else {
-            copyPath = this.getImageFileCopyPath(fileData, ext);
+            copyPath = this.getImageFileCopyPath(fileData, ext, attempt);
         }
 
         return copyPath;
     }
 
-    async getVideoFileCopyPath(filePath, ext) {
+    async getVideoFileCopyPath(filePath, ext, attempt) {
         const date = await this.getVideoDate(filePath);
-        const copyPath = date ? this.getDateFileName(date, ext) : this.getFileName(ext);
+        const copyPath = date ? this.getDateFileName(date, ext, attempt) : this.getFileName(ext);
         const dir = date ? this.videosDir : path.join(this.videosDir, 'unsorted');
 
         return path.join(dir, copyPath);
     }
 
-    getImageFileCopyPath(fileData, ext) {
+    getImageFileCopyPath(fileData, ext, attempt) {
         const date = this.exifExtensions.includes(ext) ? this.getExifDate(fileData) : null;
-        const copyPath = date ? this.getDateFileName(date, ext) : this.getFileName(ext);
+        const copyPath = date ? this.getDateFileName(date, ext, attempt) : this.getFileName(ext);
         const dir = date ? this.photosDir : this.imagesDir;
 
         return path.join(dir, copyPath);
     }
 
-    getDateFileName(date, ext) {
+    getDateFileName(date, ext, attempt) {
         const year = date.getFullYear().toString();
-        const fileName = this.getFileDate(date) + this.getRandomString(4) + ext;
+        let fileName = this.getFileDate(date);
+        if (attempt > 0) {
+            fileName += `_${attempt}`
+        }
+        fileName += ext
 
         return path.join(year, fileName);
     }
@@ -240,8 +255,9 @@ module.exports = class Backup {
         const day = this.padZeroDatePart(date.getDate());
         const hours = this.padZeroDatePart(date.getHours());
         const minutes = this.padZeroDatePart(date.getMinutes());
+        const seconds = this.padZeroDatePart(date.getSeconds());
 
-        return `${year}-${month}-${day}-${hours}-${minutes}_`;
+        return `${year}-${month}-${day}-${hours}-${minutes}-${seconds}`;
     }
 
     padZeroDatePart(datePart) {
@@ -252,12 +268,16 @@ module.exports = class Backup {
     }
 
     async copyFile(filePath, fileData) {
-        let fileCopyPath = await this.getFileCopyPath(filePath, fileData);
+        let attempt = 0;
+
+        let fileCopyPath = await this.getFileCopyPath(filePath, fileData, attempt);
         let copyPath = path.join(this.backupPath, fileCopyPath);
 
+        // if file with this date time exists
         let isFileExists = await this.isFileExists(copyPath);
         while (isFileExists) {
-            fileCopyPath = await this.getFileCopyPath(filePath, fileData);
+            attempt++;
+            fileCopyPath = await this.getFileCopyPath(filePath, fileData, attempt);
             copyPath = path.join(this.backupPath, fileCopyPath);
             isFileExists = await this.isFileExists(copyPath);
         }
